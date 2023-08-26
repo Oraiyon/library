@@ -18,16 +18,14 @@ const closeForm= document.querySelector(".close");
 const bookTitle= document.querySelector("#title");
 const bookAuthor= document.querySelector("#author");
 const bookPages= document.querySelector("#pages");
-const bookStatus= document.querySelector("#status");
+const bookYes= document.querySelector("#yes");
 const submit= document.querySelector(".submit");
  
 submit.addEventListener("click", (e) => {
-    let book1= new Book(bookTitle, bookAuthor, bookPages, bookStatus);
-    //input is blank
-    console.log(bookTitle.innerText)
+    (bookYes.checked === true) ? bookStatus = "Read" : bookStatus = "Not Read";
+    let book1= new Book(bookTitle.value, bookAuthor.value, bookPages.value, bookStatus);
     addBookToLibrary(book1);
     e.preventDefault();
-    console.table(myLibrary);
     displayBook(myLibrary);
     bookForm.reset();
 });
