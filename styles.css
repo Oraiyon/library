@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --primaryColor: rgb(73, 73, 73);
+    --secondaryColor: rgb(236, 16, 16);
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.05rem;
+}
+
+body{
+    background-color: rgb(31, 30, 30);
+}
+
+.newBook{
+    margin: 20px 0 20px 20px;
+}
+
+form, fieldset, .container{
+    padding: 20px;
+}
+
+form{
+    padding-top: 0;
+    display: none;
+}
+
+fieldset{
+    border-radius: 8px;
+    background-color: var(--primaryColor);
+    border-color: var(--secondaryColor);
+}
+
+fieldset p{
+    padding-bottom: 10px;
+}
+
+legend{
+    padding: 0 5px;
+}
+
+input{
+    border-radius: 8px;
+    color: black;
+    padding-left: 5px;
+}
+
+button{
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--primaryColor);
+    box-shadow: 1px 1px white;
+}
+
+button:hover{
+    background-color: var(--secondaryColor);
+    box-shadow: 1px 1px black;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.close{
+    margin: 20px;
+    display: none;
+}
+
+.container{
+    padding-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.container div{
+    width: auto;
+    border: 2px solid var(--secondaryColor);
+    background-color: var(--primaryColor);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
