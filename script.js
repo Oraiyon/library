@@ -74,5 +74,3 @@ const library = (() => {
     });
     return {displayBook};
 })();
-
-library.displayBook;
