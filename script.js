@@ -72,5 +72,4 @@ const library = (() => {
         bookForm.setAttribute("style", "display:none;");
         closeForm.setAttribute("style", "display:none;");
     });
-    return {displayBook};
 })();
