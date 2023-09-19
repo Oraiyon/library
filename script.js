@@ -7,7 +7,9 @@ const library = (() => {
     const bookAuthor= document.querySelector("#author");
     const bookPages= document.querySelector("#pages");
     const bookYes= document.querySelector("#yes");
-    const submit= document.querySelector(".submit");
+    const titleError = document.querySelector(".titleError");
+    const authorError = document.querySelector(".authorError");
+    const pagesError = document.querySelector(".pagesError");
 
     const myLibrary=[];
 
@@ -23,22 +25,62 @@ const library = (() => {
     function addBookToLibrary(book){
         myLibrary.push(book);
     };
-    
-    submit.addEventListener("click", (e) => {
-        (bookYes.checked === true) ? bookStatus = "Read" : bookStatus = "Not Read";
-        let book1= new Book(bookTitle.value, bookAuthor.value, bookPages.value, bookStatus);
-        addBookToLibrary(book1);
+
+    bookForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        displayBook(myLibrary);
-        bookForm.reset();
+        if (bookTitle.validity.valid && bookAuthor.validity.valid && bookPages.validity.valid) {
+            validateForm();
+            checkInBook();
+        } else {
+            validateForm();
+        }
     });
 
+    const validateForm = () => {
+        validateTitle();
+        validateAuthor();
+        validatePages();
+    };
+
+    const validateTitle = () => {
+        if (bookTitle.validity.valueMissing) {
+            titleError.classList.add("activeError");
+            titleError.innerText = "Title Required";
+        } else {
+            titleError.innerText = "";
+        }
+    };
+
+    const validateAuthor = () => {
+        if (bookAuthor.validity.valueMissing) {
+            authorError.classList.add("activeError");
+            authorError.innerText = "Author Required";
+        } else {
+            authorError.innerText = "";
+        }
+    }
+
+    const validatePages = () => {
+        if (bookPages.validity.valueMissing) {
+            pagesError.classList.add("activeError");
+            pagesError.innerText = "Page Count Required";
+        } else {
+            pagesError.innerText = "";
+        }
+    }
+
+    const checkInBook = () => {
+        (bookYes.checked === true) ? bookStatus = "Read" : bookStatus = "Not Read";
+        const book= new Book(bookTitle.value, bookAuthor.value, bookPages.value, bookStatus);
+        addBookToLibrary(book);
+        displayBook(myLibrary);
+        bookForm.reset();
+    };
+
     const displayBook = (array) => {
+        clearElement(container);
         array.forEach(book => {
             const bookCard= document.createElement("div");
-            submit.addEventListener("click", () => {
-                bookCard.remove();
-            });
             bookCard.setAttribute("style", "display:flex; font-size: 2rem;");
             bookCard.innerText = `"${book.title}", ${book.author}, ${book.pages} pages`;
             container.appendChild(bookCard);
@@ -63,12 +105,20 @@ const library = (() => {
         });
     };
 
+    const clearElement = (element) => {
+        while (element.firstChild) {
+            element.removeChild(element.firstChild)
+        }
+    };
+
     newBook.addEventListener("click", () =>{
+        newBook.setAttribute("style", "display:none;");
         bookForm.setAttribute("style", "display: block");
         closeForm.setAttribute("style", "display: flex;");
     });
 
     closeForm.addEventListener("click", () => {
+        newBook.setAttribute("style", "display:block;");
         bookForm.setAttribute("style", "display:none;");
         closeForm.setAttribute("style", "display:none;");
     });
