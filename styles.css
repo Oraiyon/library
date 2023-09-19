@@ -84,3 +84,7 @@ button:hover{
     padding: 10px;
     text-align: center;
 }
+
+.activeError{
+    color: var(--secondaryColor);
+}
